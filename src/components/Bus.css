@@ -1,0 +1,36 @@
+.bus {
+    display: flex;
+    flex-wrap: wrap; 
+    flex-direction: row;
+    justify-content: center;
+    max-width: 250px;
+    border: 2px solid rgba(255, 255, 255, 0.849);
+    border-radius: 10px;
+    padding: 1em 0.5em;
+    margin: 0 auto;
+  }
+  
+  .seat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40px; 
+    height: 50px;
+    margin: 3px; 
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.555);
+  }
+  
+  .green {
+    color: rgb(144, 238, 144); 
+  }
+  
+  .red {
+    color: rgba(255, 0, 0, 0.884);
+  }
+  

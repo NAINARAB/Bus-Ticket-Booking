@@ -1,0 +1,83 @@
+.home{
+    padding: 2em;
+    background-color: rgba(137, 43, 226, 0.76);
+}
+.sbus{
+    margin: 1.5em 0 3em 0;
+    display: flex;
+    justify-content: center;
+}
+.home h2, h4{
+    color: white
+}
+.place{
+    margin: 0 1em;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.placeinput{
+    align-items: flex-end !important;
+    padding: 0.8em 0.5em 0.8em 1em;
+    outline: none;
+    width: 100%;
+    border: none;
+}
+
+.hov{
+    cursor: pointer !important;
+    transition: all 0.3s;
+}
+.hov:hover{
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 4px rgb(119, 117, 117);
+}
+
+.fuldiv{
+    padding: 2em;
+    background-color: rgba(137, 43, 226, 0.76);
+    height: 89vh;
+    overflow-y: scroll;
+}
+.fuldiv::-webkit-scrollbar{
+    display: none;
+}
+form{
+    all: unset !important;
+}
+.fuldiv .inpt{
+    width: 100%;
+    max-width: 400px;
+    padding: 0.7em 1.3em !important;
+}
+
+.fuldiv label{
+    color: white;
+    margin-left: 0.7em;
+}
+
+.fuldiv .btn{
+    margin-top: 1em;
+    margin-left: 1em;
+    width: fit-content;
+}
+
+.box{
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 600px){
+    .sbus{
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1em;
+    }
+}

@@ -1,0 +1,44 @@
+.side{
+    display: flex;
+    flex-direction: column;
+}
+
+.sbutton{
+    width: 100%;
+    padding: 1em;
+    text-align: left;
+    color:rgb(83, 82, 82);
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.sbutton:hover{
+    background-color: #f2f2f2;
+    color: blue;
+}
+
+.crnt{
+    background-color: #f2f2f2;
+    color: blue;
+}
+
+.menu{
+    position: absolute;
+    top:13px;
+    left:10px;
+    display: none;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .menu{
+        display: block;
+    }
+    .side{
+        display: none;
+    }
+}
