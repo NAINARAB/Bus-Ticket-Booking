@@ -9,6 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { supabase } from '../../supabase';
 import Alr from '../alert/alert';
 import DialogBox from '../DialogBox/dialog';
+import pushActivity from '../activity/activitypush';
 
 const BusRoutes = () => {
     const [routes, setRoutes] = useState([]);
@@ -70,6 +71,7 @@ const BusRoutes = () => {
                         'alrmes': "New Route Added"
                     }); setDialog(false); setRefresh(!refresh);
                 }
+                pushActivity('Route Added');
             } catch (e) {
                 console.log(e);
             }
@@ -98,7 +100,7 @@ const BusRoutes = () => {
                     setAlert({
                         'dispalr': true, 'alrstatus': true, 'close': setAlert,
                         'alrmes': "Route Updated"
-                    }); doRefresh(); close();
+                    }); doRefresh(); close(); pushActivity('Route Updated');
                 }
             } catch (e) {
                 console.log(e);

@@ -1,0 +1,7 @@
+.dont{
+    height: 100vh;
+    overflow-y: scroll;
+}
+.dont::-webkit-scrollbar{
+    display: none;
+}

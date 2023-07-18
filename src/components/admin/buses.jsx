@@ -7,7 +7,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { supabase } from '../../supabase';
 import Alr from '../alert/alert';
 import DialogBox from '../DialogBox/dialog';
-
+import { Link } from 'react-router-dom';
 
 const Buses = () => {
     const [buses, setBuses] = useState([]);
@@ -72,6 +72,14 @@ const Buses = () => {
                         'alrmes': "New Bus Added"
                     }); setDialog(false); setRefresh(!refresh);
                 }
+                try {
+                    const {data} = await supabase
+                    .from('activity')
+                    .insert([{
+                        'event': 'Bus Added' 
+                    }])
+                    if(data){}
+                }catch(e){}
             } catch (e) {
                 console.log(e);
             }
@@ -105,6 +113,14 @@ const Buses = () => {
                         'alrmes': "Bus Updated"
                     });doRefresh(); close();
                 }
+                try {
+                    const {data} = await supabase
+                    .from('activity')
+                    .insert([{
+                        'event': 'Bus Updated' 
+                    }])
+                    if(data){}
+                }catch(e){}
             } catch (e) {
                 console.log(e);
             }
@@ -218,7 +234,7 @@ const Buses = () => {
                                         </div>
                                     : <h3>Currently No Buses</h3>}
                             </React.Fragment>
-                            : "Please Login"}
+                            : <h2>Please Login <Link to={`/login/${false}`}>Go To Login Page</Link> </h2>}
                     </div>
 
                 </div>

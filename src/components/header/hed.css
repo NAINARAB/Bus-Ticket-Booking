@@ -16,6 +16,21 @@
     display: none;
 }
 
+.devlop{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    font-size: 12px;
+    text-align: center;
+    color:black;
+    background-color: lightyellow;
+    border: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 3px;
+}
+
 @media only screen and (max-width: 991px){
     .menuicon{
         display: inline;

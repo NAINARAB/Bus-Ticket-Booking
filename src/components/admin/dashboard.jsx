@@ -4,6 +4,7 @@ import Header from '../header/hed';
 import Sidenav from '../sidenav/sidenav';
 import { CircularProgress } from '@mui/material';
 import { supabase } from '../../supabase';
+import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
     const [buses, setBuses] = useState(null);
@@ -46,7 +47,7 @@ const AdminDashboard = () => {
             } catch (e) { }
             try {
                 const { data, error } = await supabase
-                    .from('booking')
+                    .from('seats')
                     .select('pk')
                 if (data) {
                     setBookings(data.length)
@@ -56,7 +57,7 @@ const AdminDashboard = () => {
                 const { data, error } = await supabase
                     .from('users')
                     .select('pk')
-                    .eq('type',false)
+                    .eq('type', false)
                 if (data) {
                     setUsers(data.length)
                 }
@@ -73,38 +74,42 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className='col-lg-10' style={{ padding: '2em' }}>
-                    <div className='cont'>
-                        <div className='dis'>
-                            <center>
-                                <h1>{buses !== null ? buses : <CircularProgress />}</h1>
-                                <h2>Total Buses</h2>
-                            </center>
-                        </div>
-                        <div className='dis'>
-                            <center>
-                                <h1>{routes !== null ? routes : <CircularProgress />}</h1>
-                                <h2>Routes</h2>
-                            </center>
-                        </div>
-                        <div className='dis'>
-                            <center>
-                                <h1>{trips !== null? trips : <CircularProgress />}</h1>
-                                <h2>Trips</h2>
-                            </center>
-                        </div>
-                        <div className='dis'>
-                            <center>
-                                <h1>{bookings !== null ? bookings : <CircularProgress />}</h1>
-                                <h2>Bookings</h2>
-                            </center>
-                        </div>
-                        <div className='dis'>
-                            <center>
-                                <h1>{users !== null ? users : <CircularProgress />}</h1>
-                                <h2>Customers</h2>
-                            </center>
-                        </div>
-                    </div>
+                    {isAdmin === true ?
+                        <>
+                            <div className='cont'>
+                                <div className='dis'>
+                                    <center>
+                                        <h1>{buses !== null ? buses : <CircularProgress />}</h1>
+                                        <h2>Total Buses</h2>
+                                    </center>
+                                </div>
+                                <div className='dis'>
+                                    <center>
+                                        <h1>{routes !== null ? routes : <CircularProgress />}</h1>
+                                        <h2>Routes</h2>
+                                    </center>
+                                </div>
+                                <div className='dis'>
+                                    <center>
+                                        <h1>{trips !== null ? trips : <CircularProgress />}</h1>
+                                        <h2>Trips</h2>
+                                    </center>
+                                </div>
+                                <div className='dis'>
+                                    <center>
+                                        <h1>{bookings !== null ? bookings : <CircularProgress />}</h1>
+                                        <h2>Bookings</h2>
+                                    </center>
+                                </div>
+                                <div className='dis'>
+                                    <center>
+                                        <h1>{users !== null ? users : <CircularProgress />}</h1>
+                                        <h2>Customers</h2>
+                                    </center>
+                                </div>
+                            </div>
+                        </>
+                        : <h2>Please Login <Link to={`/login/${false}`}>Go To Login Page</Link></h2>}
 
                 </div>
             </div>

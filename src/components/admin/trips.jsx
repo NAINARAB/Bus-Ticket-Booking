@@ -7,6 +7,7 @@ import EastIcon from '@mui/icons-material/East';
 import { supabase } from '../../supabase';
 import Alr from '../alert/alert';
 import DialogBox from '../DialogBox/dialog';
+import pushActivity from '../activity/activitypush';
 
 
 const Trips = () => {
@@ -93,7 +94,7 @@ const Trips = () => {
                     setAlert({
                         'dispalr': true, 'alrstatus': true, 'close': setAlert,
                         'alrmes': "New Trip Added"
-                    }); setDialog(false); setRefresh(!refresh);
+                    }); setDialog(false); setRefresh(!refresh);pushActivity('Trip Added')
                 }
             } catch (e) {
                 console.log(e);
@@ -124,7 +125,7 @@ const Trips = () => {
                     setAlert({
                         'dispalr': true, 'alrstatus': true, 'close': setAlert,
                         'alrmes': "Trip Updated"
-                    }); doRefresh(); close();
+                    }); doRefresh(); close(); pushActivity('trip updated')
                 }
             } catch (e) {
                 console.log(e);

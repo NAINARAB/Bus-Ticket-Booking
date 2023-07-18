@@ -10,6 +10,7 @@ import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SearchIcon from '@mui/icons-material/Search';
+import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import './side.css';
 
 const Sidenav = ({ user, current }) => {
@@ -68,9 +69,9 @@ const Sidenav = ({ user, current }) => {
                                 <GridViewIcon /> Dashboard
                         </button>
                         <button 
-                            onClick={() => {nav('/usermytrip')}} 
-                            className={current === 'mytrip' ? "sbutton crnt" : 'sbutton'}>
-                                <ModeOfTravelIcon /> My Trips
+                            onClick={() => {nav('/usermytickets')}} 
+                            className={current === 'mytickets' ? "sbutton crnt" : 'sbutton'}>
+                                <LocalActivityIcon /> My Tickets
                         </button>
                         <button 
                             onClick={() => {nav('/usernotification')}} 
@@ -78,13 +79,12 @@ const Sidenav = ({ user, current }) => {
                                 <NotificationsNoneIcon /> Notification
                         </button>
                         <button 
-                            onClick={() => {nav('/userdashboard')}} 
+                            onClick={() => {nav('/userbussearch')}} 
                             className={current === 'searchbus' ? "sbutton crnt" : 'sbutton'}>
                                 <SearchIcon /> Search Bus
                         </button>
                     </React.Fragment>
                 }
-
             </div>
         </React.Fragment>
     )

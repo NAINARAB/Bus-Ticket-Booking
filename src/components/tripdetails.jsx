@@ -5,15 +5,18 @@ import './com.css';
 import { Link, useParams } from "react-router-dom";
 import Bus from "./bus";
 import Alr from "./alert/alert";
+import { useNavigate } from "react-router-dom";
+import pushActivity from "./activity/activitypush";
 
 const TripDetails = () => {
+    const nav = useNavigate();
     const [tripdetails, setTripDetails] = useState([]);
 
     const [bookedSeats, setBookedSeats] = useState([]);
     const [totalSeatsArray, setTotalSeatsArray] = useState([]);
     const [totalSeat, setTotalSeat] = useState();
     const [seatCost, setSeatCost] = useState();
-    
+
 
     const [passengerNameArray, setPassengerNameArray] = useState([]);
     const [passengerAgeArray, setPassengerAgeArray] = useState([]);
@@ -22,11 +25,10 @@ const TripDetails = () => {
     const [crntName, setCrntName] = useState('');
     const [crntAge, setCrntAge] = useState('');
     const [crntSeat, setCrntSeat] = useState(null);
-    
+
 
     // const [sam, setSam] = useState([]);
     const [fet, setFet] = useState(false);
-    const [alert, setAlert] = useState({});
     const { id } = useParams();
     const isuser = sessionStorage.getItem('isuser');
     const userPK = sessionStorage.getItem('pkuser');
@@ -90,6 +92,22 @@ const TripDetails = () => {
         } catch { }
     }
 
+    async function pushNotification() {
+        if (isuser) {
+            try {
+                const { data, error } = await supabase
+                    .from('notification')
+                    .insert([{
+                        'user_id': parseInt(userPK),
+                        'message': "Tickets Booked Successfully for " + passengerNameArray.toString() +
+                                    " Check Your Tickets in MY Tickets Page",
+                        'to_all_status': false
+                    }])
+                    .select()               
+            } catch (e) { }
+        }
+    }
+
     function loopInsert() {
         let lnth = passengerNameArray.length
         for (let i = 0; i < lnth; i++) {
@@ -101,11 +119,9 @@ const TripDetails = () => {
             })
         }
         setFet(!fet);
-        setAlert({
-            'dispalr': true, 'alrstatus': true, 'close': setAlert,
-            'alrmes': "Tickets Reserved You Can Pay Later"
-        });setPassengerNameArray([]);setPassengerAgeArray([]);setPassengerSeatArray([]);
-        setTotalCost(0);
+        nav('/usermytickets');
+        pushNotification();
+        pushActivity(`Ticket Booked for ${passengerNameArray.toString()}`)
     }
 
     function insertPassenger() {
@@ -119,7 +135,6 @@ const TripDetails = () => {
 
     return (
         <React.Fragment>
-            {alert.dispalr === true && <Alr value={alert} />}
             <Header />
             <div className="fuldiv">
                 <div className="row">
@@ -131,7 +146,7 @@ const TripDetails = () => {
                         {tripdetails.map(obj => (
                             <h3 style={{ color: 'lightpink' }}>
                                 {(obj.route.start_point + " To " + obj.route.end_point).toUpperCase()} -
-                                <span style={{color:'white'}}>
+                                <span style={{ color: 'white' }}>
                                     &nbsp;Ticket Price ({seatCost})
                                 </span>
                             </h3>
@@ -155,7 +170,7 @@ const TripDetails = () => {
                                                 obj + ", "
                                             ))}
                                         </div>
-                                        <h3 style={{color:'white'}}>Total Amount {totalCost}</h3>
+                                        <h3 style={{ color: 'white' }}>Total Amount {totalCost}</h3>
                                     </>}
                                 <br />
                                 <form>
@@ -164,8 +179,8 @@ const TripDetails = () => {
                                         className="inpt"
                                         value={crntName}
                                         onChange={(e) => setCrntName(e.target.value)}
-                                        required 
-                                        placeholder="Name"/><br />
+                                        required
+                                        placeholder="Name" /><br />
                                     <label>Age</label><br />
                                     <input
                                         type="number"
@@ -173,12 +188,12 @@ const TripDetails = () => {
                                         value={crntAge}
                                         onChange={(e) => setCrntAge(e.target.value)}
                                         required min={0}
-                                        placeholder="Age"/><br />
+                                        placeholder="Age" /><br />
                                     <label>Choose Seat</label><br />
                                     <select
                                         className="inpt"
                                         onChange={(e) => { setCrntSeat(e.target.value) }}
-                                        required 
+                                        required
                                         placeholder="Seat No">
                                         <option value={null} disabled={true} selected={true}>Select Seat</option>
                                         {totalSeatsArray
@@ -199,7 +214,7 @@ const TripDetails = () => {
                                     </button>}
                             </div>
                             : <h3 style={{ color: 'white' }}>Please Login to Book Your Tickets
-                                <br /><br /><Link style={{ color: 'yellow' }} to={`/login/${id}`}>Go To Login Page</Link></h3>}
+                                <br /><br /><Link style={{ color: 'yellow' }} to={`/login/${parseInt(id)}`}>Go To Login Page</Link></h3>}
                     </div>
 
                 </div>

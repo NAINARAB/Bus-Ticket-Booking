@@ -59,9 +59,9 @@
     width: fit-content;
 }
 .arrayadd{
-    position: absolute;
-    right:38px;
-    bottom:85px;
+    position: relative;
+    left:190px;
+    bottom: 53px;
 }
 .dis{
     padding: 1em;
@@ -82,4 +82,49 @@
 .dis h1{
     color:blue;
     font-size: 80px;
+}
+
+.booked{
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 15px 0;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color:black !important;
+}
+.sec{
+    color:black !important;
+    width: 33%;
+    padding: 0 1em;
+}
+.secful{
+    min-width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.sec h5{
+    color: rgb(59, 59, 59);
+}
+
+.rule{
+    min-height: 100%;
+    border: 1px solid darkmagenta;
+}
+
+@media only screen and (max-width: 800px){
+    .booked{
+        flex-direction: column;
+    }
+    .sec{
+        width: 100%;
+        margin: 15px 0;
+    }
+    .rule{
+        min-height: unset;
+        min-width: 100%;
+    }
 }

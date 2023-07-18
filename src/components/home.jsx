@@ -4,11 +4,13 @@ import Header from "./header/hed";
 import { supabase } from "../supabase";
 import './com.css';
 import { useNavigate } from "react-router-dom";
+import pushActivity from "./activity/activitypush";
 
 const Home = () => {
     const [trip, setTrip] = useState([]);
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
+    const isUser = sessionStorage.getItem('isuser');
     const nav = useNavigate()
     const today = new Date;
     useEffect(() => {
@@ -27,13 +29,17 @@ const Home = () => {
             if (error) throw console.log(error)
             if (data !== null) {
                 setTrip(data)
-            }
+            }pushActivity('Visited to Home')
         } catch (e) { console.log(e) }
     }
 
     function navto(arg){
         const value = parseInt(arg);
-        nav(`trip/${value}`);
+        if(isUser){
+            nav(`/trip/${value}`)
+        }else{
+            nav(`trip/${value}`)
+        }
     }
 
     return (
@@ -76,11 +82,8 @@ const Home = () => {
                                     <h5 style={{ textAlign: 'center' }}>
                                         <span style={{ float: 'left' }}>{obj.start_time}</span>
                                         <span style={{ float: 'right' }}>{obj.end_time}</span>
-                                    </h5><br />
-                                    <i>
-                                        <span style={{ float: 'left' }}>Starts</span>
-                                        <span style={{ float: 'right' }}>Ends</span>
-                                    </i><br />
+                                    </h5><br /><br />
+                                    
                                     Day:
                                     <p>{obj.day}</p><br />
                                     Seats:

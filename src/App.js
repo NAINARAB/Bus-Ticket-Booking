@@ -8,10 +8,13 @@ import BusRoutes from './components/admin/routes';
 import Trips from './components/admin/trips';
 import Bookings from './components/admin/bookings';
 import AdminNotification from './components/admin/notification';
+
 import UserDashboard from './components/user/dashboard';
-import MyTrip from './components/user/mytrip';
+import MyTickets from './components/user/mytickets';
 import UserNotification from './components/user/notification';
 import TripDetails from './components/tripdetails';
+import UserSearchBus from './components/user/searchbus';
+
 
 function App() {
   return (
@@ -29,8 +32,9 @@ function App() {
         <Route path='/adminnotifications' element={<AdminNotification />} />
         {/* user routes */}
         <Route path='/userdashboard' element={<UserDashboard />} />
-        <Route path='/usermytrip' element={<MyTrip/>} />
+        <Route path='/usermytickets' element={<MyTickets />} />
         <Route path='/usernotification' element={<UserNotification />} />
+        <Route path='/userbussearch' element={<UserSearchBus />} />
       </Routes>
     </BrowserRouter>
   );

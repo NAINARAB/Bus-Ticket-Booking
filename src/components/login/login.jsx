@@ -3,6 +3,7 @@ import './logcss.css';
 import { supabase } from "../../supabase";
 import Alr from "../alert/alert";
 import { useNavigate, useParams } from "react-router-dom";
+import pushActivity from "../activity/activitypush";
 
 
 const Login = () => {
@@ -19,16 +20,14 @@ const Login = () => {
         sessionStorage.setItem('isadmin', true);
         sessionStorage.setItem('pkadmin', data);
         nav('/admindashboard');
+        pushActivity('Admin Loged In' + data)
     }
 
     function user(data) {
         sessionStorage.setItem('isuser', true);
         sessionStorage.setItem('pkuser', data);
-        if(typeof id === 'boolean'){
-            nav('/userdashboard')
-        }else{
-            nav(`/trip/${id}`)
-        }
+        nav('/userdashboard')
+        pushActivity(`User Loged In ${data}`)
     }
 
     async function login() {
@@ -46,9 +45,9 @@ const Login = () => {
                     data.map(obj => {
                         obj.type == true
                             ?
-                            admin(obj.pk )
+                            admin(obj.pk)
                             :
-                            user( obj.pk )
+                            user(obj.pk)
                     })
                 } else {
                     setAlert({
@@ -87,14 +86,14 @@ const Login = () => {
                         'dispalr': true,
                         'close': setAlert,
                         'alrmes': "New Account Created"
-                    }); clear(); isLogin(true);
+                    }); clear(); setIsLogin(true); pushActivity('User Registered')
                 }
             }
         } catch (e) {
             console.log(e);
         }
     }
-    
+
     function clear() {
         setEmail(''); setPassword(''); setConPassword('');
     }
@@ -107,6 +106,7 @@ const Login = () => {
                 <div className="cntr">
                     <div className="formcard">
                         <h3>{isLogin === true ? "Login" : "SignUp"}</h3>
+                        <h5 style={{textAlign:'center'}}>{isLogin === true && 'admin@123 | admin'}</h5>
                         <label className="loglable">
                             Email
                         </label>

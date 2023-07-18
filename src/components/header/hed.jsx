@@ -33,6 +33,9 @@ const Header = () => {
                 </div>
             </div>
             <div style={{marginBottom:'4.50em'}}></div>
+            <div className="devlop">
+                Devloped By - RajNainaar (rajnainaar@gmail.com)
+            </div>
         </React.Fragment>
     );
 }
